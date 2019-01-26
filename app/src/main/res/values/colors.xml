@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="week_text">#000000</color>
+    <color name="today_text">#FF0000</color>
+    <color name="this_month_text">#F3F3F3</color>
+    <color name="other_month_text">#828282</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="btn_a_bg">#99E3E3E3</color>
+
+    <!-- 阴历 月分颜色 -->
+    <color name="yinli_month_text">#0099cc</color>
+    <!-- 今天背景颜色 -->
+    <color name="today_background_a">#70ff00ff</color>
+    <color name="today_background_b">#90ff00ff</color>
+
+    <color name="submit_bg_a">#1296db</color>
+    <color name="submit_bg_b">#991296db</color>
+
+    <color name="a">#FFFFFF</color>
+    <color name="b">#000000</color>
+    <color name="c">#FF0000</color>
+    <color name="d">#FF8000</color>
+    <color name="e">#FFFF00</color>
+    <color name="f">#00FF00</color>
+    <color name="g">#00FFFF</color>
+    <color name="h">#0000FF</color>
+    <color name="i">#FF00FF</color>
+    <color name="j">#808080</color>
+</resources>
