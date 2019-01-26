@@ -32,10 +32,10 @@ import java.io.OutputStreamWriter;
  */
 
 public class FileUtils {
-    private static final int numOfEncAndDec = 0x99; //加密解密秘钥
+
+    private static final int numOfEncAndDec = 0x09; //加密解密秘钥
     private static int dataOfFile = 0; //文件字节内容
     private static String charsetName = "utf-8";
-
 
     public static String getSDPath(Context mContext){
 
