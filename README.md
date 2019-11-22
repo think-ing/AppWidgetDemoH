@@ -25,4 +25,5 @@ CalendarWidget 日历桌面挂件，新版
 ![Image](https://github.com/think-ing/AppWidgetDemoH/blob/master/home.jpg)
 ![Image](https://github.com/think-ing/AppWidgetDemoH/blob/master/setting.jpg)
 ![Image](https://github.com/think-ing/AppWidgetDemoH/blob/master/desktop.jpg)
+![Image text](https://github.com/your_github/address/blob/master/image/1.png)
 
