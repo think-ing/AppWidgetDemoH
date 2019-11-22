@@ -17,8 +17,8 @@ CalendarWidget 日历桌面挂件，新版
 </br>
 </br>
 如果想使用此项目，你应该修改：</br>
-1、FileUtils类中numOfEncAndDec参数，这个是文件加密密钥</br>
-2、NetworkRequest类中 5个腾讯云对象存储参数。
+1、ConstantParameter类中前八个参数（其中前五个参数必须修改）</br>
+2、你也可以安装 AppWidgetDemoH\app\build\outputs\apk\debug\app-debug.apk 直接使用
 </br>
 然后就可一使用了。
 </br>
