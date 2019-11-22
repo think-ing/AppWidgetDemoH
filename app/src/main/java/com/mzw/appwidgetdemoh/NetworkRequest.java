@@ -3,6 +3,7 @@ package com.mzw.appwidgetdemoh;
 import android.content.Context;
 import android.util.Log;
 
+import com.mzw.appwidgetdemoh.tools.ConstantParameter;
 import com.tencent.cos.xml.CosXmlService;
 import com.tencent.cos.xml.CosXmlServiceConfig;
 import com.tencent.cos.xml.exception.CosXmlClientException;
@@ -31,20 +32,12 @@ import okhttp3.Request;
  * 网络方法
  * Created by think on 2019/1/20.
  */
-
 public class NetworkRequest {
     private Context mContext;
 
-    String secretId = "";
-    String secretKey ="";
-    String bucket = "存储桶名称";
-    String appid = "对象存储的服务 APPID";
-    String region = "存储桶所在的地域";
-
-
     //创建 CosXmlServiceConfig 对象，根据需要修改默认的配置参数
     private CosXmlServiceConfig serviceConfig = new CosXmlServiceConfig.Builder()
-            .setAppidAndRegion(appid, region)
+            .setAppidAndRegion(ConstantParameter.appid, ConstantParameter.region)
             .setDebuggable(true)
             .builder();
 
@@ -62,7 +55,7 @@ public class NetworkRequest {
 
     public NetworkRequest(Context mContext) {
         this.mContext = mContext;
-        this.qCloudCredentialProvider = new ShortTimeCredentialProvider(secretId,secretKey, 300);
+        this.qCloudCredentialProvider = new ShortTimeCredentialProvider(ConstantParameter.secretId,ConstantParameter.secretKey, 300);
         this.cosXmlService = new CosXmlService(mContext, serviceConfig, qCloudCredentialProvider);
         this.transferConfig = new TransferConfig.Builder().build();
         this.transferManager = new TransferManager(cosXmlService, transferConfig);
@@ -81,7 +74,7 @@ public class NetworkRequest {
     public void downloadFile(String fileName,String savedDirPath,CosXmlResultListener mCosXmlResultListener) {
         //下载文件
         COSXMLDownloadTask cosxmlDownloadTask = transferManager.download(
-                mContext, bucket, fileName, savedDirPath);
+                mContext, ConstantParameter.bucket, fileName, savedDirPath);
 
         //设置任务状态回调, 可以查看任务过程
         cosxmlDownloadTask.setTransferStateListener(new TransferStateListener(){
@@ -106,11 +99,9 @@ public class NetworkRequest {
 
     public void uploadingFile(String fileName,String srcPath,CosXmlResultListener mCosXmlResultListener) {
         //上传文件
-        COSXMLUploadTask cosxmlUploadTask = transferManager.upload(bucket, fileName, srcPath, null);
+        COSXMLUploadTask cosxmlUploadTask = transferManager.upload(ConstantParameter.bucket, fileName, srcPath, null);
         //设置返回结果回调
         cosxmlUploadTask.setCosXmlResultListener(mCosXmlResultListener);
     }
-
-
 
 }

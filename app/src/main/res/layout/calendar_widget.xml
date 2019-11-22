@@ -110,27 +110,21 @@
         android:orientation="horizontal">
         <TextView
             style="@style/week_textview"
-            android:layout_marginRight="5dp"
             android:text="一"/>
         <TextView
             style="@style/week_textview"
-            android:layout_marginRight="5dp"
             android:text="二"/>
         <TextView
             style="@style/week_textview"
-            android:layout_marginRight="5dp"
             android:text="三"/>
         <TextView
             style="@style/week_textview"
-            android:layout_marginRight="5dp"
             android:text="四"/>
         <TextView
             style="@style/week_textview"
-            android:layout_marginRight="5dp"
             android:text="五"/>
         <TextView
             style="@style/week_textview"
-            android:layout_marginRight="5dp"
             android:text="六"/>
         <TextView
             style="@style/week_textview"

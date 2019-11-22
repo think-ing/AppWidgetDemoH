@@ -3,7 +3,9 @@ package com.mzw.appwidgetdemoh.tools;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,6 +33,23 @@ import java.util.TreeMap;
 
 public class ConstantParameter {
 
+    // 腾讯云 对象存储 参数
+    public static final String secretId = "";
+    public static final String secretKey ="";
+    public static final String bucket = "存储桶名称";
+    public static final String appid = "对象存储的服务 APPID";
+    public static final String region = "存储桶所在的地域";
+
+    // 加密内容   加密密钥
+    public static final int FILE_KEY = 0x00;
+    // 文件内容编码
+    public static final String CHARSET_NAME = "utf-8";
+
+    // 用户密码 MD5 加密 密钥
+    public static final int MD5_KEY = 0x00;
+    public static final String MD5_KEY_FLAVOUR = "by";
+
+    // ---------------- 广播  -------------------------------------------------------------------------
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
     public static SimpleDateFormat sdf_a = new SimpleDateFormat("MM月dd日");
     public static SimpleDateFormat sdf_year = new SimpleDateFormat("yyyy");
@@ -75,6 +94,7 @@ public class ConstantParameter {
     public static List<String[]> constellationList;//[1月20，2月18，水瓶座，古怪革新者的星座]
     public static String constellation;
 
+
     public static HashMap<String, String> getFestivalSolarMap() {
         festivalSolarMap = new HashMap<String, String>();
         festivalSolarMap.put("01月01日", "元旦");festivalSolarMap.put("05月12日", "护士");
@@ -93,8 +113,8 @@ public class ConstantParameter {
         festivalLunarMap.put("一月初一", "春节");festivalLunarMap.put("八月十五", "中秋");
         festivalLunarMap.put("一月十五", "元宵");festivalLunarMap.put("九月初九", "重阳");
         festivalLunarMap.put("五月初五", "端午");festivalLunarMap.put("腊月初八", "腊八");
-        festivalLunarMap.put("七月初七", "七夕");festivalLunarMap.put("腊月廿四", "小年");
-        festivalLunarMap.put("七月十五", "中元");
+        festivalLunarMap.put("七月初七", "七夕");festivalLunarMap.put("腊月廿三", "北方小年");
+        festivalLunarMap.put("七月十五", "中元");festivalLunarMap.put("腊月廿四", "南方小年");
         //腊月最后一天 为除夕 需要特殊处理  我直接写入 Lunar 类中了
         //festivalLunarMap.put("一月零零", "除夕");
         return festivalLunarMap;
@@ -212,5 +232,31 @@ public class ConstantParameter {
             e.printStackTrace();
         }
         return constellation;
+    }
+    /**
+     * 获得屏幕宽度
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenWidth(Context context){
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.widthPixels;
+    }
+
+    /**
+     * 获得屏幕高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getScreenHeight(Context context)
+    {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.heightPixels;
     }
 }

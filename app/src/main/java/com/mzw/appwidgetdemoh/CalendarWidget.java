@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -42,6 +43,7 @@ import java.util.TreeMap;
 
 import static android.app.Notification.PRIORITY_DEFAULT;
 import static android.app.Notification.VISIBILITY_SECRET;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 /**
  * 日历挂件
@@ -218,6 +220,7 @@ public class CalendarWidget extends AppWidgetProvider {
             //将农历拆分为 月 和 日
             String yinli_month = mDateBean.yinlia.substring(0,2);
             String yinli_day = mDateBean.yinlia.substring(2,4);
+            String _yinli_day = "";
             if(mDateBean.yinlia.startsWith("闰")){
                 yinli_month = mDateBean.yinlia.substring(0,3);
                 yinli_day = mDateBean.yinlia.substring(3,5);
@@ -226,9 +229,9 @@ public class CalendarWidget extends AppWidgetProvider {
             String _key = ConstantParameter.sdf.format(mDateBean.date);//使用阳历为 key
             //如果是初一 则显示月分
             if("初一".equals(yinli_day)){
-                mDayView.setTextViewText(R.id.id_yinli_text, yinli_month);
-                mDayView.setTextColor(R.id.id_yinli_text, context.getResources().getColor(R.color.yinli_month_text));
+                _yinli_day = yinli_month;
             }else{
+                _yinli_day = "";
                 mDayView.setTextViewText(R.id.id_yinli_text, yinli_day);
             }
 
@@ -236,44 +239,50 @@ public class CalendarWidget extends AppWidgetProvider {
 
             //特殊节日  > 农历节日 > 阳历节日 > 24节气 > 三伏三九
             if("除夕".equals(yinli_day)){
-                mDayView.setTextColor(R.id.id_yinli_text, context.getResources().getColor(R.color.yinli_month_text));
+                _yinli_day = "除夕";
             }else{
                 // 三伏  三九
                 if(map3 != null ){
                     if(!TextUtils.isEmpty((String)map3.get(_key)) && ((String)map3.get(_key)).indexOf("天") == -1){
-                        mDayView.setTextViewText(R.id.id_yinli_text, (String)map3.get(_key));
-                        mDayView.setTextColor(R.id.id_yinli_text, context.getResources().getColor(R.color.yinli_month_text));
+                        _yinli_day = (String)map3.get(_key);
                     }
                 }
 
                 //24节气
                 if(map24 != null ){
                     if(!TextUtils.isEmpty((String)map24.get(_key))){
-                        mDayView.setTextViewText(R.id.id_yinli_text, (String)map24.get(_key));
-                        mDayView.setTextColor(R.id.id_yinli_text, context.getResources().getColor(R.color.yinli_month_text));
+                        _yinli_day = (String)map24.get(_key);
                     }
                 }
 
                 //阳历节日
                 String festivalSolar = ConstantParameter.getFestivalSolarMap().get(ConstantParameter.sdf_a.format(mDateBean.date));
                 if(!TextUtils.isEmpty(festivalSolar)){
-                    mDayView.setTextViewText(R.id.id_yinli_text, festivalSolar);
-                    mDayView.setTextColor(R.id.id_yinli_text, context.getResources().getColor(R.color.yinli_month_text));
+                    _yinli_day = festivalSolar;
                 }
 
                 //农历节日
                 String festivalLunar = ConstantParameter.getFestivalLunarMap().get(mDateBean.yinlia);
                 if(!TextUtils.isEmpty(festivalLunar)){
-                    mDayView.setTextViewText(R.id.id_yinli_text, festivalLunar);
-                    mDayView.setTextColor(R.id.id_yinli_text, context.getResources().getColor(R.color.yinli_month_text));
+                    _yinli_day = festivalLunar;
+
                 }
             }
 
             //特殊节日
             String birthday = (String)birthdayMap.get(mDateBean.yinlib);
             if(!TextUtils.isEmpty(birthday) && birthday.indexOf(",") > 0){
-                mDayView.setTextViewText(R.id.id_yinli_text, birthday.split(",")[0]);
+                _yinli_day = birthday.split(",")[0];
+            }
+
+            // 设置阴历特殊日子 高亮
+            if(!TextUtils.isEmpty(_yinli_day)){
+                mDayView.setTextViewText(R.id.id_yinli_text, _yinli_day);
                 mDayView.setTextColor(R.id.id_yinli_text, context.getResources().getColor(R.color.yinli_month_text));
+                //字数多了  字体减小
+                if(_yinli_day.length() >= 4){
+                    mDayView.setTextViewTextSize(R.id.id_yinli_text, COMPLEX_UNIT_SP,10);
+                }
             }
 
             // 突出 当天
@@ -294,6 +303,7 @@ public class CalendarWidget extends AppWidgetProvider {
                                     .setAction(ConstantParameter.ACTION_ITEM_LAYOUT+"_"+i)
                                     .putExtra("receive_date",mDateBean.date.getTime()),
                             PendingIntent.FLAG_UPDATE_CURRENT));
+
 
             mRowView.addView(R.id.id_calendar_row,mDayView);
             if (mRowView != null && i % 7 == 6){
@@ -636,7 +646,6 @@ public class CalendarWidget extends AppWidgetProvider {
         notification.defaults = Notification.DEFAULT_SOUND;
         notiManager.notify(notifyId, notification);
     }
-
 
 }
 

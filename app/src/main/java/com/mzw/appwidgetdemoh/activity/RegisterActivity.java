@@ -57,7 +57,6 @@ import okio.Sink;
  * 注册
  * Created by think on 2019/1/20.
  */
-
 public class RegisterActivity  extends Activity implements View.OnClickListener {
 
     private LinearLayout linearLayout;

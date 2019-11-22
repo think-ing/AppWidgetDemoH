@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.text.TextUtils;
 import android.util.Log;
@@ -57,7 +59,6 @@ import okio.Sink;
  * 登陆
  * Created by think on 2019/1/20.
  */
-
 public class LoginActivity extends Activity implements View.OnClickListener {
 
     private LinearLayout linearLayout;
@@ -105,7 +106,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             super.handleMessage(msg);
         }
     };
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -172,7 +172,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 //找回密码  手机号验证
                 sendCode(2);
                 break;
-
             case R.id.id_submit_view:
                 boolean b = false;
                 username = username_view.getText().toString().trim();
@@ -190,12 +189,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                             .setPositiveButton("确定",null)
                             .create().show();
                 }
-
                 break;
         }
     }
-
-
 
     @Override
     protected void onDestroy() {
@@ -203,7 +199,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         FileUtils.deleteFile(SDPath);
         super.onDestroy();
     }
-
 
     //mob  短信验证  UI，发送，验证 都是由 mob完成
     public void sendCode(final int sign) {
@@ -235,8 +230,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 //                    } else {
                     startActivity(intent);
 //                    }
-
-
                 } else{
                     // TODO 处理错误的结果
                     Log.i("---mzw---","错误...");
@@ -260,8 +253,4 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         });
         page.show(mContext);
     }
-
-
-
-
 }

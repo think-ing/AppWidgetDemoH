@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5 {
 
-
     public static String encrypt(String password){
         StringBuffer sb = new StringBuffer();
         // 得到一个信息摘要器
@@ -19,11 +18,11 @@ public class MD5 {
             // 把每一个byte做一个与运算 0xff
             for (byte b : result) {
                 // 与运算
-                int number = b & 0xff;
+                int number = b & ConstantParameter.MD5_KEY;
                 String str = Integer.toHexString(number);
                 if (str.length() == 1) {
                     //加盐
-                    sb.append("by");
+                    sb.append(ConstantParameter.MD5_KEY_FLAVOUR);
                 }
                 sb.append(str);
             }

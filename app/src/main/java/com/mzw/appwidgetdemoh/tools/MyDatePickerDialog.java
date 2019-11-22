@@ -182,8 +182,4 @@ public class MyDatePickerDialog  extends AlertDialog implements DialogInterface.
 //        void onDateSet(DatePicker view, int year, int month, int dayOfMonth, String lunarStr, String str);
         void onDateSet(DatePicker view, int year, int month, int dayOfMonth,String lunarYMD, String lunarMD);
     }
-
-
-
-
 }

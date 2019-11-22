@@ -1,10 +1,14 @@
 package com.mzw.appwidgetdemoh.activity;
 
 import android.app.Activity;
+import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -25,10 +29,10 @@ import java.util.Map;
  * 样式调整  主要是背景颜色和透明度
  * Created by think on 2019/1/19.
  */
-
 public class SampleActivity  extends Activity {
 
     private SeekBar seekBar;
+    private LinearLayout linearLayout;
     private LinearLayout layout;
     private Context mContext;
     private int mProgress = 66;
@@ -46,9 +50,11 @@ public class SampleActivity  extends Activity {
         sign = getIntent().getIntExtra("sign",0);
 
         seekBar = findViewById(R.id.id_seekBar);
+        linearLayout = findViewById(R.id.id_linearLayout);
         layout = findViewById(R.id.id_layout);
 
         if(sign == 1){
+            _setBackground();
             layout.setVisibility(View.VISIBLE);
         }else{
             layout.setVisibility(View.INVISIBLE);
@@ -123,4 +129,48 @@ public class SampleActivity  extends Activity {
         awm.updateAppWidget(componentName, remoteViews);
 
     }
+
+    public void _setBackground(){
+        // 获取壁纸管理器
+        WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
+        // 获取当前壁纸
+        Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+        // 将Drawable,转成Bitmap
+        Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
+
+        //截取相应屏幕的Bitmap
+        Bitmap pbm = Bitmap.createBitmap(bm, 0, 0, ConstantParameter.getScreenWidth(mContext), ConstantParameter.getScreenHeight(mContext));
+        //设置 背景
+        linearLayout.setBackground(new BitmapDrawable(mContext.getResources(),pbm));
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

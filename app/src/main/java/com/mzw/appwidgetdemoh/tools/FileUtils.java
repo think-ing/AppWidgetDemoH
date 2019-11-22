@@ -33,9 +33,7 @@ import java.io.OutputStreamWriter;
 
 public class FileUtils {
 
-    private static final int numOfEncAndDec = 0x09; //加密解密秘钥
     private static int dataOfFile = 0; //文件字节内容
-    private static String charsetName = "utf-8";
 
     public static String getSDPath(Context mContext){
 
@@ -46,7 +44,6 @@ public class FileUtils {
             Log.i("---mzw---",  "创建文件夹: " + isInner);
         }
         Log.i("---mzw---",  "缓存路径: " + fileCache.getAbsolutePath());
-
 
         return fileCache.getAbsolutePath();
     }
@@ -62,7 +59,7 @@ public class FileUtils {
         OutputStream fos = new FileOutputStream(encFile);
         while ((dataOfFile = fis.read()) > -1) {
             //异或（^） 两边的位不同时，结果为1，否则为0.如1100^1010=0110
-            fos.write(dataOfFile^numOfEncAndDec);
+            fos.write(dataOfFile^ConstantParameter.FILE_KEY);
         }
         fis.close();
         fos.flush();
@@ -82,7 +79,7 @@ public class FileUtils {
         OutputStream fos = new FileOutputStream(decFile);
         while ((dataOfFile = fis.read()) > -1) {
             //异或（^） 两边的位不同时，结果为1，否则为0.如1100^1010=0110
-            fos.write(dataOfFile^numOfEncAndDec);
+            fos.write(dataOfFile^ConstantParameter.FILE_KEY);
         }
 
         fis.close();
@@ -93,7 +90,7 @@ public class FileUtils {
     //文件写入
     public static void writeFile(File file,String content) throws IOException {
         FileOutputStream fos = new FileOutputStream(file);
-        OutputStreamWriter writer = new OutputStreamWriter(fos,charsetName);
+        OutputStreamWriter writer = new OutputStreamWriter(fos,ConstantParameter.CHARSET_NAME);
         writer.write(content);
         writer.close();
         fos.close();
@@ -107,7 +104,7 @@ public class FileUtils {
         char[] buffer = null;
 
         FileInputStream bis = new FileInputStream(file);
-        InputStreamReader reader=new InputStreamReader(bis,"utf-8");
+        InputStreamReader reader=new InputStreamReader(bis,ConstantParameter.CHARSET_NAME);
         int len;
         buffer = new char[bis.available()];
         do {

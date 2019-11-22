@@ -2,9 +2,13 @@ package com.mzw.appwidgetdemoh;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -55,7 +59,7 @@ import java.util.TreeMap;
 
 /**
  * 主要技术
- * 使用腾讯云 对象存储  https://console.cloud.tencent.com
+ * 使用腾讯云 对象存储  https://console.cloud.tencent.com （）微信登陆
  *
  * mob短信验证
  * 文件创建、写入、读取、加密、解密、删除
@@ -577,6 +581,44 @@ Log.i("---mzw---","查找本地 : " + birthdayMap);
 //        return treeMap;
 //    }
 
+    // 屏幕
+//    public void qwe(){
+
+//        // 获取壁纸管理器
+//        WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
+//        // 获取当前壁纸
+//        Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+//        // 将Drawable,转成Bitmap
+//        Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
+//
+//        float step = 0;
+//        //计算出屏幕的偏移量
+//        step = (bm.getWidth() - 480) / (7 - 1);
+//        //截取相应屏幕的Bitmap
+//        Bitmap pbm = Bitmap.createBitmap(bm, (int) (5 * step), 0, 480, 854);
+//        //设置 背景
+//        layout.setBackgroundDrawable(new BitmapDrawable(pbm));
+
+
+//        // 获取壁纸管理器
+//      WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
+//      // 获取当前壁纸
+//      Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+//      // 将Drawable,转成Bitmap
+//      Bitmap bm = ((BitmapDrawable) wallpaperDrawable).getBitmap();
+//      // 需要详细说明一下，mScreenCount、getCurrentWorkspaceScreen()、mScreenWidth、mScreenHeight分别
+//     //对应于Launcher中的桌面屏幕总数、当前屏幕下标、屏幕宽度、屏幕高度.等下拿Demo的哥们稍微要注意一下
+//     float step = 0;
+//     // 计算出屏幕的偏移量
+//     step = (bm.getWidth() - LauncherPreferenceModel.mScreenWidth) / (LauncherPreferenceModel.mScreenCount - 1);
+//     // 截取相应屏幕的Bitmap
+//     Bitmap pbm = Bitmap.createBitmap(bm, (int) (mLauncher.getCurrentWorkspaceScreen() * step), 0,
+//             (int) (LauncherPreferenceModel.mScreenWidth),
+//             (int) (LauncherPreferenceModel.mScreenHeight));
+//
+//     // 设置 背景
+//     layout.setBackgroundDrawable(new BitmapDrawable(pbm));
+//    }
 
     @Override
     protected void onDestroy() {
