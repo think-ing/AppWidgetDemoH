@@ -22,6 +22,7 @@ CalendarWidget 日历桌面挂件，新版
 </br>
 然后就可一使用了。
 </br>
-![Image text](https://github.com/think-ing/AppWidgetDemoH/blob/master/home.jpg)
-![Image text](https://github.com/think-ing/AppWidgetDemoH/blob/master/setting.jpg)
-![Image text](https://github.com/think-ing/AppWidgetDemoH/blob/master/desktop.jpg)
+![Image](https://github.com/think-ing/AppWidgetDemoH/blob/master/home.jpg)
+![Image](https://github.com/think-ing/AppWidgetDemoH/blob/master/setting.jpg)
+![Image](https://github.com/think-ing/AppWidgetDemoH/blob/master/desktop.jpg)
+
